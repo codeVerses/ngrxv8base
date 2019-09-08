@@ -1,0 +1,21 @@
+import { NgModule } from "@angular/core";
+import { StoreModule } from "@ngrx/store";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../../environments/environment";
+import { EffectsModule } from "@ngrx/effects";
+import { CounterEffects } from "./counter/effects";
+
+import { counterReducer } from "./counter/reducers";
+
+@NgModule({
+  imports: [
+    StoreModule.forRoot({ count: counterReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
+    EffectsModule.forRoot([CounterEffects])
+  ],
+  providers: []
+})
+export class StoreRootModule {}
